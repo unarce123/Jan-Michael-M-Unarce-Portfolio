@@ -36,20 +36,13 @@ if (resumePdfLink) {
 ========================================================= */
 
 function openGmailCompose(recipient, subject = "", body = "") {
-
     const gmailComposeUrl =
         "https://mail.google.com/mail/?view=cm&fs=1" +
         `&to=${encodeURIComponent(recipient)}` +
         `&su=${encodeURIComponent(subject)}` +
         `&body=${encodeURIComponent(body)}`;
 
-    const gmailWindow = window.open(gmailComposeUrl, "_blank");
-
-    // Fallback if the browser blocks the new tab.
-    if (!gmailWindow) {
-        window.location.href = gmailComposeUrl;
-    }
-
+    window.open(gmailComposeUrl, "_blank");
 }
 
 
