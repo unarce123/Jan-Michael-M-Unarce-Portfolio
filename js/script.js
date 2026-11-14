@@ -1,4 +1,3 @@
-
 /* =========================================================
    PORTFOLIO CONFIGURATION
 ========================================================= */
@@ -399,10 +398,10 @@ const projectContent = {
 
             <p>
                 <a
-                    href="https://github.com/unarce123"
+                    href="https://github.com/unarce123/equipment-borrowing-system"
                     target="_blank"
                     rel="noopener noreferrer">
-                    Visit my GitHub profile →
+                    View Project Repository →
                 </a>
             </p>
 
@@ -658,7 +657,7 @@ const projectContent = {
                     href="https://github.com/unarce123/AR-Hand-Face-Tracker-Boss-Fight"
                     target="_blank"
                     rel="noopener noreferrer">
-                    View project repository →
+                    View Project Repository →
                 </a>
             </p>
 
@@ -1088,5 +1087,79 @@ if ("IntersectionObserver" in window) {
         element.classList.add("show");
 
     });
+
+}
+
+
+/* =========================================================
+   HERO TYPEWRITER EFFECT
+========================================================= */
+
+const typingText = document.getElementById("typingText");
+
+if (typingText) {
+
+    const typingPhrases = [
+        "IT Support",
+        "Computer Troubleshooting",
+        "Hardware & Software Installation",
+        "Basic Networking"
+    ];
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion) {
+
+        typingText.textContent = typingPhrases[0];
+
+    } else {
+
+        let phraseIndex = 0;
+        let characterIndex = 0;
+        let isDeleting = false;
+
+        function typeHeroText() {
+
+            const currentPhrase = typingPhrases[phraseIndex];
+
+            if (isDeleting) {
+                characterIndex--;
+            } else {
+                characterIndex++;
+            }
+
+            typingText.textContent = currentPhrase.substring(
+                0,
+                characterIndex
+            );
+
+            let typingSpeed = isDeleting ? 45 : 85;
+
+            if (!isDeleting && characterIndex === currentPhrase.length) {
+
+                isDeleting = true;
+                typingSpeed = 1400;
+
+            } else if (isDeleting && characterIndex === 0) {
+
+                isDeleting = false;
+
+                phraseIndex = (
+                    phraseIndex + 1
+                ) % typingPhrases.length;
+
+                typingSpeed = 350;
+
+            }
+
+            window.setTimeout(typeHeroText, typingSpeed);
+
+        }
+
+        typeHeroText();
+
+    }
 
 }
