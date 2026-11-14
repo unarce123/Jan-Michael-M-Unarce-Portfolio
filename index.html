@@ -13,11 +13,166 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- CUSTOM NOTIFICATION STYLES -->
+    <style>
+        /* =========================================================
+           CUSTOM TOAST NOTIFICATION
+        ========================================================= */
+
+        .toast {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 99999;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            width: min(390px, calc(100% - 40px));
+            padding: 18px;
+
+            background: #111c2e;
+            border: 1px solid rgba(20, 184, 166, 0.35);
+            border-left: 4px solid #14b8a6;
+            border-radius: 12px;
+
+            color: #ffffff;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease,
+                visibility 0.3s ease;
+
+            overflow: hidden;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .toast-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(20, 184, 166, 0.15);
+            color: #2dd4bf;
+            border-radius: 50%;
+        }
+
+        .toast-icon svg {
+            width: 21px;
+            height: 21px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .toast-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .toast-content h4 {
+            margin: 0 0 5px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .toast-content p {
+            margin: 0;
+            color: #a7b7c8;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .toast-close {
+            align-self: flex-start;
+            flex-shrink: 0;
+
+            background: transparent;
+            border: none;
+
+            color: #94a3b8;
+            font-size: 23px;
+            line-height: 1;
+            cursor: pointer;
+
+            padding: 0 3px;
+            transition: color 0.2s ease;
+        }
+
+        .toast-close:hover {
+            color: #ffffff;
+        }
+
+        .toast-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            height: 3px;
+            width: 100%;
+
+            background: #14b8a6;
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .toast.show .toast-progress {
+            animation: toastProgress 4s linear forwards;
+        }
+
+        @keyframes toastProgress {
+            from {
+                transform: scaleX(1);
+            }
+
+            to {
+                transform: scaleX(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .toast {
+                top: 15px;
+                right: 15px;
+                width: calc(100% - 30px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .toast,
+            .toast-close {
+                transition: none;
+            }
+
+            .toast.show .toast-progress {
+                animation: none;
+            }
+        }
+    </style>
+
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- Portfolio JavaScript -->
-    <script src="js/script.js?v=5" defer></script>
+    <script src="js/script.js?v=6" defer></script>
 </head>
 
 <body>
@@ -973,6 +1128,47 @@
         </section>
 
     </main>
+
+    <!-- =================================================
+         CUSTOM TOAST NOTIFICATION
+    ================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true">
+
+        <div class="toast-icon" id="toastIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+                <path d="m5 12 4 4L19 6"></path>
+            </svg>
+        </div>
+
+        <div class="toast-content">
+
+            <h4 id="toastTitle">
+                Message sent successfully!
+            </h4>
+
+            <p id="toastMessage">
+                Thank you for reaching out. I'll get back to you soon.
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="toast-close"
+            id="toastClose"
+            aria-label="Close notification">
+            &times;
+        </button>
+
+        <div class="toast-progress"></div>
+
+    </div>
 
     <!-- =================================================
          PROJECT MODAL

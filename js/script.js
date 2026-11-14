@@ -15,9 +15,13 @@ const PORTFOLIO_CONFIG = {
    EMAILJS INITIALIZATION
 ========================================================= */
 
-emailjs.init({
-    publicKey: "zrju8ZZ7TH2HRAT3R"
-});
+if (window.emailjs) {
+    emailjs.init({
+        publicKey: "zrju8ZZ7TH2HRAT3R"
+    });
+} else {
+    console.error("EmailJS SDK could not be loaded.");
+}
 
 
 /* =========================================================
@@ -38,6 +42,93 @@ if (githubLink) {
 
 if (resumePdfLink) {
     resumePdfLink.href = PORTFOLIO_CONFIG.resumePdf;
+}
+
+
+/* =========================================================
+   CUSTOM TOAST NOTIFICATION
+========================================================= */
+
+const toast = document.getElementById("toast");
+const toastTitle = document.getElementById("toastTitle");
+const toastMessage = document.getElementById("toastMessage");
+const toastClose = document.getElementById("toastClose");
+const toastIcon = document.getElementById("toastIcon");
+
+let toastTimer;
+
+
+function showToast(title, message, type = "success") {
+
+    if (!toast) {
+        return;
+    }
+
+    if (toastTitle) {
+        toastTitle.textContent = title;
+    }
+
+    if (toastMessage) {
+        toastMessage.textContent = message;
+    }
+
+    if (toastIcon) {
+
+        if (type === "error") {
+
+            toastIcon.style.background = "rgba(239, 68, 68, 0.15)";
+            toastIcon.style.color = "#f87171";
+
+            toastIcon.innerHTML = `
+                <svg viewBox="0 0 24 24">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            `;
+
+        } else {
+
+            toastIcon.style.background = "rgba(20, 184, 166, 0.15)";
+            toastIcon.style.color = "#2dd4bf";
+
+            toastIcon.innerHTML = `
+                <svg viewBox="0 0 24 24">
+                    <path d="m5 12 4 4L19 6"></path>
+                </svg>
+            `;
+
+        }
+
+    }
+
+    clearTimeout(toastTimer);
+
+    toast.classList.remove("show");
+
+    // Restart the progress animation.
+    void toast.offsetWidth;
+
+    toast.classList.add("show");
+
+    toastTimer = window.setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 4000);
+
+}
+
+
+if (toastClose) {
+
+    toastClose.addEventListener("click", () => {
+
+        toast.classList.remove("show");
+
+        clearTimeout(toastTimer);
+
+    });
+
 }
 
 
@@ -727,6 +818,11 @@ document.addEventListener("keydown", event => {
 
             closeProjectModal();
 
+        } else if (toast && toast.classList.contains("show")) {
+
+            toast.classList.remove("show");
+            clearTimeout(toastTimer);
+
         }
 
     }
@@ -796,7 +892,24 @@ if (contactForm) {
 
         if (!sender || !senderEmail || !message) {
 
-            alert("Please complete all fields.");
+            showToast(
+                "Incomplete information",
+                "Please complete all fields before sending your message.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!window.emailjs) {
+
+            showToast(
+                "Email service unavailable",
+                "The email service could not be loaded. Please try again later.",
+                "error"
+            );
 
             return;
 
@@ -823,7 +936,11 @@ if (contactForm) {
             );
 
 
-            alert("Your message has been sent successfully!");
+            showToast(
+                "Message sent successfully!",
+                "Thank you for reaching out. I'll get back to you soon.",
+                "success"
+            );
 
             contactForm.reset();
 
@@ -832,8 +949,10 @@ if (contactForm) {
 
             console.error("EmailJS Error:", error);
 
-            alert(
-                "Unable to send your message. Please try again later."
+            showToast(
+                "Message not sent",
+                "Something went wrong. Please try again later.",
+                "error"
             );
 
         } finally {
