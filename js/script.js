@@ -1,3 +1,4 @@
+
 /* =========================================================
    PORTFOLIO CONFIGURATION
 ========================================================= */
@@ -37,12 +38,12 @@ if (resumePdfLink) {
 
 function openGmailCompose(recipient, subject = "", body = "") {
     const gmailComposeUrl =
-        "https://mail.google.com/mail/?view=cm&fs=1" +
+        "https://mail.google.com/mail/u/0/?view=cm&fs=1" +
         `&to=${encodeURIComponent(recipient)}` +
         `&su=${encodeURIComponent(subject)}` +
         `&body=${encodeURIComponent(body)}`;
 
-    window.open(gmailComposeUrl, "_blank");
+    window.location.href = gmailComposeUrl;
 }
 
 
@@ -86,10 +87,6 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 
 const projectContent = {
 
-    /* =====================================================
-       PROJECT 01 - EQUIPMENT BORROWING SYSTEM
-    ===================================================== */
-
     equipment: `
         <p class="doc-type">PROJECT 01 / SYSTEM DEVELOPMENT</p>
 
@@ -100,12 +97,8 @@ const projectContent = {
             borrowing transactions, user requests, approvals, and returns.
         </p>
 
-
-        <!-- PROJECT SCREENSHOTS AT THE TOP -->
-
         <div class="project-gallery">
 
-            <!-- FIRST IMAGE: DASHBOARD -->
             <figure>
                 <img
                     src="assets/projects/equipment-dashboard.png"
@@ -120,8 +113,6 @@ const projectContent = {
                 </figcaption>
             </figure>
 
-
-            <!-- SECOND IMAGE: EQUIPMENT LIST -->
             <figure>
                 <img
                     src="assets/projects/equipment-list.png"
@@ -138,7 +129,6 @@ const projectContent = {
 
         </div>
 
-
         <div class="case-meta">
             <span class="tag">Python</span>
             <span class="tag">Django</span>
@@ -147,8 +137,6 @@ const projectContent = {
             <span class="tag">CSS</span>
         </div>
 
-
-        <!-- PROJECT OVERVIEW -->
         <div class="case-block">
 
             <h3>Project Overview</h3>
@@ -162,8 +150,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- PROJECT WORKFLOW -->
         <div class="case-block">
 
             <h3>Borrowing Workflow</h3>
@@ -171,63 +157,42 @@ const projectContent = {
             <div class="workflow-diagram">
 
                 <div class="workflow-step">
-
                     <span class="workflow-number">01</span>
-
                     <b>Submit Request</b>
-
                     <p>
                         The user selects equipment and submits a
                         borrowing request.
                     </p>
-
                 </div>
 
-
                 <div class="workflow-step">
-
                     <span class="workflow-number">02</span>
-
                     <b>Review Request</b>
-
                     <p>
                         Authorized staff reviews the submitted request.
                     </p>
-
                 </div>
 
-
                 <div class="workflow-step">
-
                     <span class="workflow-number">03</span>
-
                     <b>Approval</b>
-
                     <p>
                         The request is approved or rejected.
                     </p>
-
                 </div>
 
-
                 <div class="workflow-step">
-
                     <span class="workflow-number">04</span>
-
                     <b>Return Monitoring</b>
-
                     <p>
                         The system tracks due dates and equipment returns.
                     </p>
-
                 </div>
 
             </div>
 
         </div>
 
-
-        <!-- PROBLEM ADDRESSED -->
         <div class="case-block">
 
             <h3>Problem Addressed</h3>
@@ -241,8 +206,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- KEY FEATURES -->
         <div class="case-block">
 
             <h3>Key Features</h3>
@@ -258,8 +221,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- TECHNOLOGY STACK -->
         <div class="case-block">
 
             <h3>Technology Stack</h3>
@@ -272,8 +233,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- CONTRIBUTION -->
         <div class="case-block">
 
             <h3>My Contribution</h3>
@@ -287,8 +246,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- TESTING SCENARIOS -->
         <div class="case-block">
 
             <h3>Testing Scenarios</h3>
@@ -298,79 +255,57 @@ const projectContent = {
                 system. Record the actual outcome after performing each test.
             </p>
 
-
             <div class="test-checklist">
 
                 <div class="test-item">
-
                     <span class="test-number">01</span>
-
                     <div>
                         <b>User Role Access</b>
-
                         <p>
                             Verify that administrator, staff, and user
                             accounts access their authorized features
                             and dashboards.
                         </p>
                     </div>
-
                 </div>
 
-
                 <div class="test-item">
-
                     <span class="test-number">02</span>
-
                     <div>
                         <b>Borrowing Request Management</b>
-
                         <p>
                             Verify request submission and pending, approved,
                             rejected, and returned statuses.
                         </p>
                     </div>
-
                 </div>
 
-
                 <div class="test-item">
-
                     <span class="test-number">03</span>
-
                     <div>
                         <b>Due Date and Penalty Calculation</b>
-
                         <p>
                             Verify the seven-day due date after approval
                             and the ₱10-per-day overdue penalty.
                         </p>
                     </div>
-
                 </div>
 
-
                 <div class="test-item">
-
                     <span class="test-number">04</span>
-
                     <div>
                         <b>Notifications</b>
-
                         <p>
                             Verify that relevant notifications are generated
                             and unread notification status is updated.
                         </p>
                     </div>
-
                 </div>
 
             </div>
 
         </div>
 
-
-        <!-- LEARNING EXPERIENCE -->
         <div class="case-block">
 
             <h3>Learning Experience</h3>
@@ -383,8 +318,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- REPOSITORY -->
         <div class="case-block">
 
             <h3>Repository</h3>
@@ -402,10 +335,6 @@ const projectContent = {
     `,
 
 
-    /* =====================================================
-       PROJECT 02 - AR HAND & FACE TRACKER
-    ===================================================== */
-
     ar: `
         <p class="doc-type">PROJECT 02 / COMPUTER VISION</p>
 
@@ -416,12 +345,8 @@ const projectContent = {
             real-time hand and face tracking with gesture-based gameplay.
         </p>
 
-
-        <!-- PROJECT SCREENSHOTS AT THE TOP -->
-
         <div class="project-gallery">
 
-            <!-- FIRST IMAGE: BOSS FIGHT GAMEPLAY -->
             <figure>
                 <img
                     src="assets/projects/ar-boss-fight.png"
@@ -436,8 +361,6 @@ const projectContent = {
                 </figcaption>
             </figure>
 
-
-            <!-- SECOND IMAGE: GAME INTERFACE -->
             <figure>
                 <img
                     src="assets/projects/ar-start-screen.png"
@@ -454,7 +377,6 @@ const projectContent = {
 
         </div>
 
-
         <div class="case-meta">
             <span class="tag">Python</span>
             <span class="tag">OpenCV</span>
@@ -462,8 +384,6 @@ const projectContent = {
             <span class="tag">Computer Vision</span>
         </div>
 
-
-        <!-- PROJECT OVERVIEW -->
         <div class="case-block">
 
             <h3>Project Overview</h3>
@@ -476,8 +396,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- PROJECT PURPOSE -->
         <div class="case-block">
 
             <h3>Project Purpose</h3>
@@ -490,8 +408,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- KEY FEATURES -->
         <div class="case-block">
 
             <h3>Key Features</h3>
@@ -507,8 +423,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- TECHNOLOGY STACK -->
         <div class="case-block">
 
             <h3>Technology Stack</h3>
@@ -521,8 +435,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- CONTRIBUTION -->
         <div class="case-block">
 
             <h3>My Contribution</h3>
@@ -541,8 +453,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- TESTING SCENARIOS -->
         <div class="case-block">
 
             <h3>Testing Scenarios</h3>
@@ -553,79 +463,57 @@ const projectContent = {
                 outcome after performing each test.
             </p>
 
-
             <div class="test-checklist">
 
                 <div class="test-item">
-
                     <span class="test-number">01</span>
-
                     <div>
                         <b>Camera Initialization</b>
-
                         <p>
                             Verify that the application can access
                             the camera and display its video feed.
                         </p>
                     </div>
-
                 </div>
 
-
                 <div class="test-item">
-
                     <span class="test-number">02</span>
-
                     <div>
                         <b>Hand and Face Tracking</b>
-
                         <p>
                             Verify that hand landmarks and face tracking
                             respond to movements in front of the camera.
                         </p>
                     </div>
-
                 </div>
 
-
                 <div class="test-item">
-
                     <span class="test-number">03</span>
-
                     <div>
                         <b>Gesture Interaction</b>
-
                         <p>
                             Verify that supported hand gestures trigger
                             their corresponding game actions.
                         </p>
                     </div>
-
                 </div>
 
-
                 <div class="test-item">
-
                     <span class="test-number">04</span>
-
                     <div>
                         <b>Game Status and Score</b>
-
                         <p>
                             Verify updates to boss health, shield,
                             player score, and game-over behavior
                             during gameplay.
                         </p>
                     </div>
-
                 </div>
 
             </div>
 
         </div>
 
-
-        <!-- LEARNING EXPERIENCE -->
         <div class="case-block">
 
             <h3>Learning Experience</h3>
@@ -639,8 +527,6 @@ const projectContent = {
 
         </div>
 
-
-        <!-- REPOSITORY -->
         <div class="case-block">
 
             <h3>Repository</h3>
@@ -705,7 +591,6 @@ function closeProjectModal() {
         return;
     }
 
-    // Close screenshot lightbox first, if it is open.
     closeImageLightbox(false);
 
     projectModal.classList.remove("open");
@@ -807,8 +692,6 @@ function closeImageLightbox(restoreFocus = true) {
 }
 
 
-/* Event delegation handles screenshots loaded into the modal */
-
 if (modalContent) {
 
     modalContent.addEventListener("click", event => {
@@ -821,8 +704,6 @@ if (modalContent) {
 
     });
 
-
-    /* Keyboard access for screenshots */
 
     modalContent.addEventListener("keydown", event => {
 
@@ -845,8 +726,6 @@ if (modalContent) {
 }
 
 
-/* Close screenshot button */
-
 if (lightboxClose) {
 
     lightboxClose.addEventListener("click", () => {
@@ -855,8 +734,6 @@ if (lightboxClose) {
 
 }
 
-
-/* Close when clicking outside the enlarged image */
 
 if (imageLightbox) {
 
@@ -883,7 +760,10 @@ document.addEventListener("keydown", event => {
 
             closeImageLightbox();
 
-        } else {
+        } else if (
+            projectModal &&
+            projectModal.classList.contains("open")
+        ) {
 
             closeProjectModal();
 
