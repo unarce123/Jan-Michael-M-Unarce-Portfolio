@@ -33,52 +33,19 @@ if (resumePdfLink) {
 
 
 /* =========================================================
-   GMAIL COMPOSE FUNCTION
+   EMAIL COMPOSE FUNCTION - USE DEFAULT EMAIL APP
 ========================================================= */
 
-function openGmailCompose(recipient, subject = "", body = "") {
-    const gmailComposeUrl =
-        "https://mail.google.com/mail/u/0/?view=cm&fs=1" +
-        `&to=${encodeURIComponent(recipient)}` +
-        `&su=${encodeURIComponent(subject)}` +
+function openEmailCompose(recipient, subject = "", body = "") {
+
+    const mailtoUrl =
+        `mailto:${recipient}` +
+        `?subject=${encodeURIComponent(subject)}` +
         `&body=${encodeURIComponent(body)}`;
 
-    window.location.href = gmailComposeUrl;
+    window.location.href = mailtoUrl;
+
 }
-
-
-/* =========================================================
-   DIRECT EMAIL LINKS - OPEN GMAIL INSTEAD OF OUTLOOK
-========================================================= */
-
-document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
-
-    link.addEventListener("click", event => {
-
-        event.preventDefault();
-
-        const mailtoAddress = link.getAttribute("href");
-        const emailDetails = mailtoAddress.substring(7).split("?");
-
-        const recipient = decodeURIComponent(emailDetails[0]);
-
-        let subject = "";
-        let body = "";
-
-        if (emailDetails[1]) {
-
-            const parameters = new URLSearchParams(emailDetails[1]);
-
-            subject = parameters.get("subject") || "";
-            body = parameters.get("body") || "";
-
-        }
-
-        openGmailCompose(recipient, subject, body);
-
-    });
-
-});
 
 
 /* =========================================================
@@ -812,7 +779,7 @@ if (menuToggle && navLinks) {
 
 
 /* =========================================================
-   CONTACT FORM - OPEN GMAIL DIRECTLY
+   CONTACT FORM - OPEN DEFAULT EMAIL APP
 ========================================================= */
 
 const contactForm = document.getElementById("contactForm");
@@ -847,7 +814,7 @@ if (contactForm) {
             `Message:\n${message}`;
 
 
-        openGmailCompose(
+        openEmailCompose(
             PORTFOLIO_CONFIG.email,
             subject,
             body
