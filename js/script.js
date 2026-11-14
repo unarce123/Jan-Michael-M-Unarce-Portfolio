@@ -1,4 +1,3 @@
-
 /* =========================================================
    PORTFOLIO CONFIGURATION
 ========================================================= */
@@ -33,23 +32,23 @@ if (resumePdfLink) {
 
 
 /* =========================================================
-   EMAIL COMPOSE FUNCTION - MOBILE FRIENDLY
+   GMAIL COMPOSE FUNCTION
 ========================================================= */
 
 function openGmailCompose(recipient, subject = "", body = "") {
-
-    const mailtoUrl =
-        `mailto:${recipient}` +
-        `?subject=${encodeURIComponent(subject)}` +
+    const gmailComposeUrl =
+        "https://mail.google.com/mail/?view=cm&fs=1" +
+        `&to=${encodeURIComponent(recipient)}` +
+        `&su=${encodeURIComponent(subject)}` +
         `&body=${encodeURIComponent(body)}`;
 
-    window.location.href = mailtoUrl;
-
+    // Better compatibility with mobile browsers.
+    window.location.href = gmailComposeUrl;
 }
 
 
 /* =========================================================
-   DIRECT EMAIL LINKS
+   DIRECT EMAIL LINKS - OPEN GMAIL INSTEAD OF OUTLOOK
 ========================================================= */
 
 document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
@@ -88,6 +87,10 @@ document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
 
 const projectContent = {
 
+    /* =====================================================
+       PROJECT 01 - EQUIPMENT BORROWING SYSTEM
+    ===================================================== */
+
     equipment: `
         <p class="doc-type">PROJECT 01 / SYSTEM DEVELOPMENT</p>
 
@@ -98,8 +101,12 @@ const projectContent = {
             borrowing transactions, user requests, approvals, and returns.
         </p>
 
+
+        <!-- PROJECT SCREENSHOTS AT THE TOP -->
+
         <div class="project-gallery">
 
+            <!-- FIRST IMAGE: DASHBOARD -->
             <figure>
                 <img
                     src="assets/projects/equipment-dashboard.png"
@@ -114,6 +121,8 @@ const projectContent = {
                 </figcaption>
             </figure>
 
+
+            <!-- SECOND IMAGE: EQUIPMENT LIST -->
             <figure>
                 <img
                     src="assets/projects/equipment-list.png"
@@ -130,6 +139,7 @@ const projectContent = {
 
         </div>
 
+
         <div class="case-meta">
             <span class="tag">Python</span>
             <span class="tag">Django</span>
@@ -138,7 +148,10 @@ const projectContent = {
             <span class="tag">CSS</span>
         </div>
 
+
+        <!-- PROJECT OVERVIEW -->
         <div class="case-block">
+
             <h3>Project Overview</h3>
 
             <p>
@@ -147,50 +160,77 @@ const projectContent = {
                 user roles, allowing administrators, staff, and users
                 to access features based on their responsibilities.
             </p>
+
         </div>
 
+
+        <!-- PROJECT WORKFLOW -->
         <div class="case-block">
+
             <h3>Borrowing Workflow</h3>
 
             <div class="workflow-diagram">
 
                 <div class="workflow-step">
+
                     <span class="workflow-number">01</span>
+
                     <b>Submit Request</b>
+
                     <p>
                         The user selects equipment and submits a
                         borrowing request.
                     </p>
+
                 </div>
 
+
                 <div class="workflow-step">
+
                     <span class="workflow-number">02</span>
+
                     <b>Review Request</b>
+
                     <p>
                         Authorized staff reviews the submitted request.
                     </p>
+
                 </div>
 
+
                 <div class="workflow-step">
+
                     <span class="workflow-number">03</span>
+
                     <b>Approval</b>
+
                     <p>
                         The request is approved or rejected.
                     </p>
+
                 </div>
 
+
                 <div class="workflow-step">
+
                     <span class="workflow-number">04</span>
+
                     <b>Return Monitoring</b>
+
                     <p>
                         The system tracks due dates and equipment returns.
                     </p>
+
                 </div>
 
             </div>
+
         </div>
 
+
+        <!-- PROBLEM ADDRESSED -->
         <div class="case-block">
+
             <h3>Problem Addressed</h3>
 
             <p>
@@ -199,9 +239,13 @@ const projectContent = {
                 equipment. The project aims to organize these activities
                 through a web-based management system.
             </p>
+
         </div>
 
+
+        <!-- KEY FEATURES -->
         <div class="case-block">
+
             <h3>Key Features</h3>
 
             <ul>
@@ -212,9 +256,13 @@ const projectContent = {
                 <li>Overdue status and penalty calculation.</li>
                 <li>Notification management.</li>
             </ul>
+
         </div>
 
+
+        <!-- TECHNOLOGY STACK -->
         <div class="case-block">
+
             <h3>Technology Stack</h3>
 
             <p>
@@ -222,9 +270,13 @@ const projectContent = {
                 logic, and MySQL for database management. HTML and CSS
                 were used to build the user interface.
             </p>
+
         </div>
 
+
+        <!-- CONTRIBUTION -->
         <div class="case-block">
+
             <h3>My Contribution</h3>
 
             <p class="contribution-note">
@@ -233,9 +285,13 @@ const projectContent = {
                 I personally handled should be identified separately from
                 the shared project features.
             </p>
+
         </div>
 
+
+        <!-- TESTING SCENARIOS -->
         <div class="case-block">
+
             <h3>Testing Scenarios</h3>
 
             <p>
@@ -243,57 +299,81 @@ const projectContent = {
                 system. Record the actual outcome after performing each test.
             </p>
 
+
             <div class="test-checklist">
 
                 <div class="test-item">
+
                     <span class="test-number">01</span>
+
                     <div>
                         <b>User Role Access</b>
+
                         <p>
                             Verify that administrator, staff, and user
                             accounts access their authorized features
                             and dashboards.
                         </p>
                     </div>
+
                 </div>
 
+
                 <div class="test-item">
+
                     <span class="test-number">02</span>
+
                     <div>
                         <b>Borrowing Request Management</b>
+
                         <p>
                             Verify request submission and pending, approved,
                             rejected, and returned statuses.
                         </p>
                     </div>
+
                 </div>
 
+
                 <div class="test-item">
+
                     <span class="test-number">03</span>
+
                     <div>
                         <b>Due Date and Penalty Calculation</b>
+
                         <p>
                             Verify the seven-day due date after approval
                             and the ₱10-per-day overdue penalty.
                         </p>
                     </div>
+
                 </div>
 
+
                 <div class="test-item">
+
                     <span class="test-number">04</span>
+
                     <div>
                         <b>Notifications</b>
+
                         <p>
                             Verify that relevant notifications are generated
                             and unread notification status is updated.
                         </p>
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
+
+        <!-- LEARNING EXPERIENCE -->
         <div class="case-block">
+
             <h3>Learning Experience</h3>
 
             <p>
@@ -301,9 +381,13 @@ const projectContent = {
                 development, database integration, user authentication,
                 role-based access, and organizing system functionality.
             </p>
+
         </div>
 
+
+        <!-- REPOSITORY -->
         <div class="case-block">
+
             <h3>Repository</h3>
 
             <p>
@@ -314,9 +398,14 @@ const projectContent = {
                     View Project Repository →
                 </a>
             </p>
+
         </div>
     `,
 
+
+    /* =====================================================
+       PROJECT 02 - AR HAND & FACE TRACKER
+    ===================================================== */
 
     ar: `
         <p class="doc-type">PROJECT 02 / COMPUTER VISION</p>
@@ -328,8 +417,12 @@ const projectContent = {
             real-time hand and face tracking with gesture-based gameplay.
         </p>
 
+
+        <!-- PROJECT SCREENSHOTS AT THE TOP -->
+
         <div class="project-gallery">
 
+            <!-- FIRST IMAGE: BOSS FIGHT GAMEPLAY -->
             <figure>
                 <img
                     src="assets/projects/ar-boss-fight.png"
@@ -344,6 +437,8 @@ const projectContent = {
                 </figcaption>
             </figure>
 
+
+            <!-- SECOND IMAGE: GAME INTERFACE -->
             <figure>
                 <img
                     src="assets/projects/ar-start-screen.png"
@@ -360,6 +455,7 @@ const projectContent = {
 
         </div>
 
+
         <div class="case-meta">
             <span class="tag">Python</span>
             <span class="tag">OpenCV</span>
@@ -367,7 +463,10 @@ const projectContent = {
             <span class="tag">Computer Vision</span>
         </div>
 
+
+        <!-- PROJECT OVERVIEW -->
         <div class="case-block">
+
             <h3>Project Overview</h3>
 
             <p>
@@ -375,9 +474,13 @@ const projectContent = {
                 and face landmarks. These tracking capabilities are
                 integrated into an interactive boss fight game.
             </p>
+
         </div>
 
+
+        <!-- PROJECT PURPOSE -->
         <div class="case-block">
+
             <h3>Project Purpose</h3>
 
             <p>
@@ -385,9 +488,13 @@ const projectContent = {
                 to recognize human movements and translate them into
                 interactive application controls.
             </p>
+
         </div>
 
+
+        <!-- KEY FEATURES -->
         <div class="case-block">
+
             <h3>Key Features</h3>
 
             <ul>
@@ -398,9 +505,13 @@ const projectContent = {
                 <li>Player score tracking.</li>
                 <li>Interactive game effects and visual feedback.</li>
             </ul>
+
         </div>
 
+
+        <!-- TECHNOLOGY STACK -->
         <div class="case-block">
+
             <h3>Technology Stack</h3>
 
             <p>
@@ -408,9 +519,13 @@ const projectContent = {
                 OpenCV handles camera input and image processing,
                 while MediaPipe Tasks provides hand landmark detection.
             </p>
+
         </div>
 
+
+        <!-- CONTRIBUTION -->
         <div class="case-block">
+
             <h3>My Contribution</h3>
 
             <p>
@@ -424,9 +539,13 @@ const projectContent = {
                 Also worked on integrating gesture-based player actions
                 and the game's boss health, shield, and score features.
             </p>
+
         </div>
 
+
+        <!-- TESTING SCENARIOS -->
         <div class="case-block">
+
             <h3>Testing Scenarios</h3>
 
             <p>
@@ -435,57 +554,81 @@ const projectContent = {
                 outcome after performing each test.
             </p>
 
+
             <div class="test-checklist">
 
                 <div class="test-item">
+
                     <span class="test-number">01</span>
+
                     <div>
                         <b>Camera Initialization</b>
+
                         <p>
                             Verify that the application can access
                             the camera and display its video feed.
                         </p>
                     </div>
+
                 </div>
 
+
                 <div class="test-item">
+
                     <span class="test-number">02</span>
+
                     <div>
                         <b>Hand and Face Tracking</b>
+
                         <p>
                             Verify that hand landmarks and face tracking
                             respond to movements in front of the camera.
                         </p>
                     </div>
+
                 </div>
 
+
                 <div class="test-item">
+
                     <span class="test-number">03</span>
+
                     <div>
                         <b>Gesture Interaction</b>
+
                         <p>
                             Verify that supported hand gestures trigger
                             their corresponding game actions.
                         </p>
                     </div>
+
                 </div>
 
+
                 <div class="test-item">
+
                     <span class="test-number">04</span>
+
                     <div>
                         <b>Game Status and Score</b>
+
                         <p>
                             Verify updates to boss health, shield,
                             player score, and game-over behavior
                             during gameplay.
                         </p>
                     </div>
+
                 </div>
 
             </div>
+
         </div>
 
+
+        <!-- LEARNING EXPERIENCE -->
         <div class="case-block">
+
             <h3>Learning Experience</h3>
 
             <p>
@@ -494,9 +637,13 @@ const projectContent = {
                 gesture interaction, and combining different
                 programming libraries into one application.
             </p>
+
         </div>
 
+
+        <!-- REPOSITORY -->
         <div class="case-block">
+
             <h3>Repository</h3>
 
             <p>
@@ -507,6 +654,7 @@ const projectContent = {
                     View Project Repository →
                 </a>
             </p>
+
         </div>
     `
 
@@ -558,6 +706,7 @@ function closeProjectModal() {
         return;
     }
 
+    // Close screenshot lightbox first, if it is open.
     closeImageLightbox(false);
 
     projectModal.classList.remove("open");
@@ -659,7 +808,7 @@ function closeImageLightbox(restoreFocus = true) {
 }
 
 
-/* Event delegation for project screenshots */
+/* Event delegation handles screenshots loaded into the modal */
 
 if (modalContent) {
 
@@ -673,6 +822,8 @@ if (modalContent) {
 
     });
 
+
+    /* Keyboard access for screenshots */
 
     modalContent.addEventListener("keydown", event => {
 
@@ -706,7 +857,7 @@ if (lightboxClose) {
 }
 
 
-/* Close by clicking outside the image */
+/* Close when clicking outside the enlarged image */
 
 if (imageLightbox) {
 
@@ -733,7 +884,7 @@ document.addEventListener("keydown", event => {
 
             closeImageLightbox();
 
-        } else if (projectModal && projectModal.classList.contains("open")) {
+        } else {
 
             closeProjectModal();
 
@@ -782,7 +933,7 @@ if (menuToggle && navLinks) {
 
 
 /* =========================================================
-   CONTACT FORM - MOBILE FRIENDLY
+   CONTACT FORM - OPEN GMAIL DIRECTLY
 ========================================================= */
 
 const contactForm = document.getElementById("contactForm");
