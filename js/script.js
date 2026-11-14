@@ -12,6 +12,15 @@ const PORTFOLIO_CONFIG = {
 
 
 /* =========================================================
+   EMAILJS INITIALIZATION
+========================================================= */
+
+emailjs.init({
+    publicKey: "zrju8ZZ7TH2HRAT3R"
+});
+
+
+/* =========================================================
    PROFILE LINKS
 ========================================================= */
 
@@ -30,55 +39,6 @@ if (githubLink) {
 if (resumePdfLink) {
     resumePdfLink.href = PORTFOLIO_CONFIG.resumePdf;
 }
-
-
-/* =========================================================
-   GMAIL COMPOSE FUNCTION
-========================================================= */
-
-function openGmailCompose(recipient, subject = "", body = "") {
-    const gmailComposeUrl =
-        "https://mail.google.com/mail/u/0/?view=cm&fs=1" +
-        `&to=${encodeURIComponent(recipient)}` +
-        `&su=${encodeURIComponent(subject)}` +
-        `&body=${encodeURIComponent(body)}`;
-
-    window.location.href = gmailComposeUrl;
-}
-
-
-/* =========================================================
-   DIRECT EMAIL LINKS - OPEN GMAIL INSTEAD OF OUTLOOK
-========================================================= */
-
-document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
-
-    link.addEventListener("click", event => {
-
-        event.preventDefault();
-
-        const mailtoAddress = link.getAttribute("href");
-        const emailDetails = mailtoAddress.substring(7).split("?");
-
-        const recipient = decodeURIComponent(emailDetails[0]);
-
-        let subject = "";
-        let body = "";
-
-        if (emailDetails[1]) {
-
-            const parameters = new URLSearchParams(emailDetails[1]);
-
-            subject = parameters.get("subject") || "";
-            body = parameters.get("body") || "";
-
-        }
-
-        openGmailCompose(recipient, subject, body);
-
-    });
-
-});
 
 
 /* =========================================================
@@ -812,14 +772,14 @@ if (menuToggle && navLinks) {
 
 
 /* =========================================================
-   CONTACT FORM - OPEN GMAIL DIRECTLY
+   CONTACT FORM - EMAILJS DIRECT SENDING
 ========================================================= */
 
 const contactForm = document.getElementById("contactForm");
 
 if (contactForm) {
 
-    contactForm.addEventListener("submit", event => {
+    contactForm.addEventListener("submit", async event => {
 
         event.preventDefault();
 
@@ -828,6 +788,10 @@ if (contactForm) {
         const senderEmail = document.getElementById("senderEmail").value.trim();
 
         const message = document.getElementById("message").value.trim();
+
+        const submitButton = contactForm.querySelector(
+            'button[type="submit"]'
+        );
 
 
         if (!sender || !senderEmail || !message) {
@@ -839,19 +803,46 @@ if (contactForm) {
         }
 
 
-        const subject = `Portfolio Inquiry from ${sender}`;
+        const originalButtonText = submitButton.textContent;
 
-        const body =
-            `Name: ${sender}\n` +
-            `Email: ${senderEmail}\n\n` +
-            `Message:\n${message}`;
+        submitButton.disabled = true;
+
+        submitButton.textContent = "Sending...";
 
 
-        openGmailCompose(
-            PORTFOLIO_CONFIG.email,
-            subject,
-            body
-        );
+        try {
+
+            await emailjs.send(
+                "service_a01ad7c",
+                "template_sl08bko",
+                {
+                    sender: sender,
+                    senderEmail: senderEmail,
+                    message: message
+                }
+            );
+
+
+            alert("Your message has been sent successfully!");
+
+            contactForm.reset();
+
+
+        } catch (error) {
+
+            console.error("EmailJS Error:", error);
+
+            alert(
+                "Unable to send your message. Please try again later."
+            );
+
+        } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent = originalButtonText;
+
+        }
 
     });
 
