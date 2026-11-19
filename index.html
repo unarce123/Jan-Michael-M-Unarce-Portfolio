@@ -1,1248 +1,2601 @@
 
+
 <!DOCTYPE html>
+
 <html lang="en">
 
+
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Personal portfolio of Jan Michael M. Unarce, an Information Technology student pursuing a career in IT Support.">
-    <meta name="theme-color" content="#0b1220">
+
+    <meta name="theme-color" id="themeColorMeta" content="#0b1220">
+
+
 
     <title>Jan Michael M. Unarce | IT Support Portfolio</title>
 
+
+
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/style.css?v=8">
+
+
 
     <!-- CUSTOM NOTIFICATION STYLES -->
+
     <style>
+
         /* =========================================================
+
            CUSTOM TOAST NOTIFICATION
+
         ========================================================= */
 
+
+
         .toast {
+
             position: fixed;
+
             top: 25px;
+
             right: 25px;
+
             z-index: 99999;
 
+
+
             display: flex;
+
             align-items: center;
+
             gap: 14px;
 
+
+
             width: min(390px, calc(100% - 40px));
+
             padding: 18px;
 
+
+
             background: #111c2e;
+
             border: 1px solid rgba(20, 184, 166, 0.35);
+
             border-left: 4px solid #14b8a6;
+
             border-radius: 12px;
 
+
+
             color: #ffffff;
+
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
 
+
+
             opacity: 0;
+
             visibility: hidden;
+
             transform: translateY(-15px);
 
+
+
             transition:
+
                 opacity 0.3s ease,
+
                 transform 0.3s ease,
+
                 visibility 0.3s ease;
 
+
+
             overflow: hidden;
+
         }
+
+
 
         .toast.show {
+
             opacity: 1;
+
             visibility: visible;
+
             transform: translateY(0);
+
         }
+
+
 
         .toast-icon {
+
             width: 42px;
+
             height: 42px;
+
             flex-shrink: 0;
+
+
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
+
+
             background: rgba(20, 184, 166, 0.15);
+
             color: #2dd4bf;
+
             border-radius: 50%;
+
         }
+
+
 
         .toast-icon svg {
+
             width: 21px;
+
             height: 21px;
+
             stroke: currentColor;
+
             stroke-width: 2.5;
+
             fill: none;
+
             stroke-linecap: round;
+
             stroke-linejoin: round;
+
         }
+
+
 
         .toast-content {
+
             flex: 1;
+
             min-width: 0;
+
         }
+
+
 
         .toast-content h4 {
+
             margin: 0 0 5px;
+
             color: #ffffff;
+
             font-size: 15px;
+
             font-weight: 600;
+
         }
+
+
 
         .toast-content p {
+
             margin: 0;
+
             color: #a7b7c8;
+
             font-size: 13px;
+
             line-height: 1.5;
+
         }
+
+
 
         .toast-close {
+
             align-self: flex-start;
+
             flex-shrink: 0;
 
+
+
             background: transparent;
+
             border: none;
 
+
+
             color: #94a3b8;
+
             font-size: 23px;
+
             line-height: 1;
+
             cursor: pointer;
 
+
+
             padding: 0 3px;
+
             transition: color 0.2s ease;
+
         }
+
+
 
         .toast-close:hover {
+
             color: #ffffff;
+
         }
+
+
 
         .toast-progress {
+
             position: absolute;
+
             bottom: 0;
+
             left: 0;
 
+
+
             height: 3px;
+
             width: 100%;
 
+
+
             background: #14b8a6;
+
             transform: scaleX(1);
+
             transform-origin: left;
+
         }
+
+
 
         .toast.show .toast-progress {
+
             animation: toastProgress 4s linear forwards;
+
         }
+
+
 
         @keyframes toastProgress {
+
             from {
+
                 transform: scaleX(1);
+
             }
+
+
 
             to {
+
                 transform: scaleX(0);
+
             }
+
         }
+
+
 
         @media (max-width: 480px) {
+
             .toast {
+
                 top: 15px;
+
                 right: 15px;
+
                 width: calc(100% - 30px);
+
             }
+
         }
+
+
 
         @media (prefers-reduced-motion: reduce) {
+
             .toast,
+
             .toast-close {
+
                 transition: none;
+
             }
+
+
 
             .toast.show .toast-progress {
+
                 animation: none;
+
             }
+
         }
+
     </style>
 
+
+
     <!-- EmailJS SDK -->
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
+
+
     <!-- Portfolio JavaScript -->
-    <script src="js/script.js?v=6" defer></script>
+
+    <script src="js/script.js?v=8" defer></script>
+
 </head>
+
+
 
 <body>
 
+
+
     <!-- NAVIGATION -->
+
     <header class="nav">
+
         <div class="wrap navin">
+
+
 
             <a href="#home" class="brand">JM<span>.</span></a>
 
+
+
             <button
+
                 class="menu"
+
                 id="menuToggle"
+
                 aria-label="Toggle navigation"
+
                 aria-expanded="false">
+
                 ☰
+
             </button>
 
+
+
             <nav class="navlinks" id="navLinks">
+
                 <a href="#home" class="active">Home</a>
+
                 <a href="#about">About</a>
+
                 <a href="#skills">Skills</a>
+
+                                <a href="#certifications">Certifications</a>
                 <a href="#projects">Projects</a>
+
                 <a href="#documentation">Documentation</a>
+
                 <a href="#contact">Contact</a>
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Switch to light mode"
+                    title="Switch to light mode">
+                    <span class="theme-toggle-icon" aria-hidden="true">☀</span>
+                    <span class="theme-toggle-label">Light mode</span>
+                </button>
+
             </nav>
 
+
+
         </div>
+
     </header>
+
+
 
     <main>
 
+
+
         <!-- =================================================
+
              HERO
+
         ================================================== -->
+
+
 
         <section class="wrap hero" id="home">
 
+
+
             <div class="hero-copy reveal">
 
+
+
                 <p class="eyebrow">
+
                     INFORMATION TECHNOLOGY STUDENT
+
                     <span>•</span>
+
                     PHILIPPINES
+
                 </p>
 
+
+
                 <h1>
+
                     JAN MICHAEL M.<br>
+
                     <span>UNARCE</span>
+
                 </h1>
+
+
 
                 <h2>Future IT Support Professional</h2>
 
+
+
                 <p class="typing-line">
+
                     Focused on
+
                     <span id="typingText"></span><span class="typing-cursor" aria-hidden="true">|</span>
+
                 </p>
 
+
+
                 <p class="lead">
+
                     An Information Technology student passionate about computer
+
                     troubleshooting, hardware and software installation, and basic
+
                     networking. Eager to apply my technical knowledge and develop
+
                     practical experience in the IT field.
+
                 </p>
+
+
 
                 <div class="actions">
 
+
+
                     <a href="#projects" class="btn primary">
+
                         Explore My Projects
+
                     </a>
+
+
 
                     <a href="#contact" class="btn">
+
                         Contact Me
+
                     </a>
+
+
 
                     <a
+
                         href="assets/documents/Unarce_Jan_Michael_M_ATSResume.pdf"
+
                         class="btn"
+
                         target="_blank"
+
                         rel="noopener">
+
                         View Resume
+
                     </a>
 
+
+
                 </div>
+
+
 
                 <!-- SOCIAL MEDIA AND CONTACT ICONS -->
+
                 <div class="social-icons" aria-label="Contact and social media links">
 
+
+
                     <!-- EMAIL -->
+
                     <a
+
                         href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=unarcejanmichael18%40gmail.com"
+
                         class="social-icon"
+
                         target="_blank"
+
                         rel="noopener noreferrer"
+
                         aria-label="Email"
+
                         title="Email">
 
+
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
+
                             <rect
+
                                 x="3" y="5"
+
                                 width="18" height="14"
+
                                 rx="2"
+
                                 fill="none"
+
                                 stroke="currentColor"
+
                                 stroke-width="1.8"/>
 
+
+
                             <path
+
                                 d="m4 7 8 6 8-6"
+
                                 fill="none"
+
                                 stroke="currentColor"
+
                                 stroke-width="1.8"
+
                                 stroke-linecap="round"/>
+
                         </svg>
 
+
+
                     </a>
+
+
 
                     <!-- LINKEDIN -->
+
                     <a
+
                         id="linkedinLink"
+
                         href="https://www.linkedin.com/in/jan-michael-unarce-0a999043a"
+
                         class="social-icon"
+
                         target="_blank"
+
                         rel="noopener noreferrer"
+
                         aria-label="LinkedIn"
+
                         title="LinkedIn">
 
+
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
+
                             <path
+
                                 fill="currentColor"
+
                                 d="M5.2 3a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4ZM3.3 9h3.8v12H3.3V9Zm6.2 0h3.6v1.6h.1a4 4 0 0 1 3.6-2c3.9 0 4.6 2.5 4.6 5.7V21h-3.8v-6c0-1.4 0-3.2-2-3.2s-2.3 1.5-2.3 3.1V21H9.5V9Z"/>
+
                         </svg>
 
+
+
                     </a>
+
+
 
                     <!-- GITHUB -->
+
                     <a
+
                         id="githubLink"
+
                         href="https://github.com/unarce123"
+
                         class="social-icon"
+
                         target="_blank"
+
                         rel="noopener noreferrer"
+
                         aria-label="GitHub"
+
                         title="GitHub">
 
+
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
+
                             <path
+
                                 fill="currentColor"
+
                                 d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.86c-2.78.6-3.37-1.18-3.37-1.18-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.52 1.03 1.52 1.03.9 1.52 2.36 1.08 2.94.82.09-.64.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.83c.85 0 1.71.12 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.91.68 1.84v2.76c0 .26.18.57.69.47A10 10 0 0 0 12 2Z"/>
+
                         </svg>
 
+
+
                     </a>
+
+
 
                     <!-- FACEBOOK -->
+
                     <a
+
                         href="https://www.facebook.com/johnmichael.unarce"
+
                         class="social-icon"
+
                         target="_blank"
+
                         rel="noopener noreferrer"
+
                         aria-label="Facebook"
+
                         title="Facebook">
 
+
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
+
                             <path
+
                                 fill="currentColor"
+
                                 d="M13.5 21v-8.2h2.8l.42-3.2H13.5V7.55c0-.93.26-1.56 1.61-1.56h1.72V3.12A23 23 0 0 0 14.32 3c-2.48 0-4.18 1.51-4.18 4.28V9.6H7.33v3.2h2.81V21h3.36Z"/>
+
                         </svg>
 
+
+
                     </a>
+
+
 
                     <!-- INSTAGRAM -->
+
                     <a
+
                         href="https://www.instagram.com/supercalifragilistic.000?psln=MWFmMTZ3M3ZzMWZqYQ=="
+
                         class="social-icon"
+
                         target="_blank"
+
                         rel="noopener noreferrer"
+
                         aria-label="Instagram"
+
                         title="Instagram">
 
+
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
+
                             <rect
+
                                 x="3" y="3"
+
                                 width="18" height="18"
+
                                 rx="5"
+
                                 fill="none"
+
                                 stroke="currentColor"
+
                                 stroke-width="1.8"/>
 
+
+
                             <circle
+
                                 cx="12" cy="12" r="4"
+
                                 fill="none"
+
                                 stroke="currentColor"
+
                                 stroke-width="1.8"/>
 
+
+
                             <circle
+
                                 cx="17.5" cy="6.8" r="1.1"
+
                                 fill="currentColor"/>
+
                         </svg>
+
+
 
                     </a>
 
+
+
                 </div>
+
+
 
                 <div class="quick">
 
+
+
                     <span>
+
                         <b>EDUCATION</b>
+
                         BS Information Technology
+
                     </span>
 
+
+
                     <span>
+
                         <b>LOCATION</b>
+
                         Ivisan, Capiz, Philippines
+
                     </span>
 
+
+
                     <span>
+
                         <b>CAREER INTEREST</b>
+
                         IT Support
+
                     </span>
+
+
 
                 </div>
 
+
+
             </div>
+
+
 
             <div class="portrait-wrap reveal">
 
+
+
                 <div class="portrait">
 
+
+
                     <img
+
                         src="assets/images/profile.png"
+
                         alt="Professional portrait of Jan Michael M. Unarce"
+
                         class="profile-photo">
 
+
+
                 </div>
+
+
 
                 <p class="photo-caption"></p>
 
+
+
             </div>
+
+
 
         </section>
 
+
+
         <!-- =================================================
+
              ABOUT
+
         ================================================== -->
+
+
 
         <section class="section" id="about">
 
+
+
             <div class="wrap">
+
+
 
                 <div class="section-head reveal">
 
+
+
                     <div>
+
                         <p class="kicker">GET TO KNOW ME</p>
+
                         <h2>About Me</h2>
+
                     </div>
 
+
+
                     <p class="section-intro">
+
                         My educational background, technical interests,
+
                         and career direction.
+
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="aboutline">
 
+
+
                     <div class="about-copy reveal">
 
+
+
                         <p>
+
                             I am a Bachelor of Science in Information Technology student
+
                             at Filamer Christian University, Inc.. I am interested in computer
+
                             systems, technical troubleshooting, and learning how technology
+
                             can help people perform their tasks more efficiently.
+
                         </p>
 
+
+
                         <p>
+
                             Through academic activities and projects, I have developed
+
                             foundational knowledge in computer hardware and software,
+
                             basic networking, and system development. I also hold a
+
                             Computer Systems Servicing NC II qualification.
+
                         </p>
 
+
+
                         <p>
+
                             My goal is to pursue a career in IT Support, where I can
+
                             apply my technical skills, assist users with computer-related
+
                             concerns, and continue improving my knowledge and experience.
+
                         </p>
+
+
 
                         <div class="focus-note">
 
+
+
                             <span class="focus-icon">⌘</span>
 
+
+
                             <span>
+
                                 <b>Career Focus</b><br>
+
                                 IT Support, Computer Troubleshooting,
+
                                 and Technical Assistance
+
                             </span>
+
+
 
                         </div>
 
+
+
                     </div>
+
+
 
                     <div class="card timeline reveal">
 
+
+
                         <div class="timeline-item">
+
+
 
                             <span class="timeline-dot"></span>
 
+
+
                             <b>
+
                                 Bachelor of Science in Information Technology
+
                             </b>
 
+
+
                             <p>
+
                                 Filamer Christian University, Inc. | 2024–Present
+
                             </p>
+
+
 
                         </div>
 
+
+
                         <div class="timeline-item">
 
+
+
                             <span class="timeline-dot"></span>
+
+
 
                             <b>Senior High School – TVL CSS</b>
 
+
+
                             <p>
+
                                 Ivisan National High School | 2022–2024
+
                             </p>
+
+
 
                         </div>
 
+
+
                         <div class="timeline-item">
 
+
+
                             <span class="timeline-dot"></span>
+
+
 
                             <b>Computer Systems Servicing NC II</b>
 
+
+
                             <p>
+
                                 Passed CSS NC II competency assessment | 2024
+
                             </p>
 
+
+
                         </div>
+
+
 
                         <div class="timeline-item">
 
+
+
                             <span class="timeline-dot"></span>
+
+
 
                             <b>Work Immersion</b>
 
+
+
                             <p>
+
                                 Advanced Specialty Learning Academy (ASLA),
+
                                 Roxas City | April 8–26, 2024
+
                             </p>
+
+
 
                         </div>
 
+
+
                     </div>
+
+
 
                 </div>
 
+
+
             </div>
+
+
 
         </section>
 
+
+
         <!-- =================================================
+
              SKILLS
+
         ================================================== -->
+
+
 
         <section class="section" id="skills">
 
+
+
             <div class="wrap">
+
+
 
                 <div class="section-head reveal">
 
+
+
                     <div>
+
                         <p class="kicker">TECHNICAL COMPETENCIES</p>
+
                         <h2>Skills & Knowledge</h2>
+
                     </div>
 
+
+
                     <p class="section-intro">
+
                         Technical skills developed through academic learning,
+
                         practical activities, and personal projects.
+
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="grid skills-grid">
 
+
+
                     <article class="card skillgroup reveal">
+
+
 
                         <span class="skill-icon">IT</span>
 
+
+
                         <h3>IT Support & Troubleshooting</h3>
 
+
+
                         <div class="tier">
+
                             <b>Technical troubleshooting</b>
+
                             <span class="level project-level">
+
                                 Practical Experience
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>Hardware installation</b>
+
                             <span class="level project-level">
+
                                 Practical Experience
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>Software installation</b>
+
                             <span class="level project-level">
+
                                 Practical Experience
+
                             </span>
+
                         </div>
+
+
 
                     </article>
 
+
+
                     <article class="card skillgroup reveal">
+
+
 
                         <span class="skill-icon">NET</span>
 
+
+
                         <h3>Networking</h3>
 
+
+
                         <div class="tier">
+
                             <b>Basic networking</b>
+
                             <span class="level project-level">
+
                                 Foundational
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>IP configuration</b>
+
                             <span class="level project-level">
+
                                 Practical Experience
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>Computer and peripheral setup</b>
+
                             <span class="level project-level">
+
                                 Practical Experience
+
                             </span>
+
                         </div>
+
+
 
                     </article>
 
+
+
                     <article class="card skillgroup reveal">
+
+
 
                         <span class="skill-icon">DEV</span>
 
+
+
                         <h3>Programming & Development</h3>
 
+
+
                         <div class="tier">
+
                             <b>Python</b>
+
                             <span class="level learning-level">
+
                                 Learning
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>HTML and CSS</b>
+
                             <span class="level learning-level">
+
                                 Learning
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>Django</b>
+
                             <span class="level learning-level">
+
                                 Learning
+
                             </span>
+
                         </div>
+
+
 
                     </article>
+
+
 
                     <article class="card skillgroup reveal">
 
+
+
                         <span class="skill-icon">APP</span>
+
+
 
                         <h3>Productivity & Tools</h3>
 
+
+
                         <div class="tier">
+
                             <b>Microsoft Office</b>
+
                             <span class="level working-level">
+
                                 Working Knowledge
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>Google Workspace</b>
+
                             <span class="level working-level">
+
                                 Working Knowledge
+
                             </span>
+
                         </div>
 
+
+
                         <div class="tier">
+
                             <b>Git and GitHub</b>
+
                             <span class="level learning-level">
+
                                 Learning
+
                             </span>
+
                         </div>
+
+
 
                     </article>
 
+
+
                 </div>
 
+
+
                 <p class="notice">
+
                     Skill levels describe my current familiarity and practical exposure.
+
                 </p>
+
+
 
             </div>
 
+
+
+        </section>        <!-- =================================================
+             CERTIFICATIONS & ACHIEVEMENTS
+        ================================================== -->
+
+        <section class="section" id="certifications">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="kicker">QUALIFICATIONS & RECOGNITION</p>
+                        <h2>Certifications & Achievements</h2>
+                    </div>
+                    <p class="section-intro">
+                        Academic recognition, technical qualifications, training programs,
+                        courses, seminars, and extracurricular achievements.
+                    </p>
+                </div>
+
+                <div class="cert-timeline">
+                    <article class="cert-year reveal">
+                        <div class="cert-year-marker"><span>2026</span></div>
+                        <div class="card cert-year-content">
+                            <div class="cert-year-heading">
+                                <div><span class="cert-period">LATEST RECOGNITION</span><h3>2026</h3></div>
+                                <span class="cert-count">13 achievements</span>
+                            </div>
+                            <ul class="cert-items">
+                                <li>Academic Awardee – 2nd Year College</li>
+                                <li>Leadership Awardee – 2nd Year College</li>
+                                <li>Service Awardee – FCUSR CCS 2nd Year Mayor</li>
+                                <li>Service Awardee – Mentor's Circle</li>
+                                <li>Service Awardee – Awana Youth Organization</li>
+                                <li>Socio-Cultural Award – Radio Drama</li>
+                                <li>Computer Literacy In-House Training Program – Mentor's Circle (2025–2026)</li>
+                                <li>World Mental Health Awareness Month 2026 – Financial Literacy and Mental Health</li>
+                                <li>World Mental Health Awareness Month 2026 – Adolescent Reproductive Health</li>
+                                <li>World Mental Health Awareness Month 2026 – Gender and Development: Safe Spaces and Gender-Based Violence</li>
+                                <li>Creating Compelling Reports Course – Cisco Networking Academy</li>
+                                <li>English for IT 1 Course – Cisco Networking Academy</li>
+                                <li>English for IT 2 Course – Cisco Networking Academy</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="cert-year reveal">
+                        <div class="cert-year-marker"><span>2025</span></div>
+                        <div class="card cert-year-content">
+                            <div class="cert-year-heading">
+                                <div><span class="cert-period">TRAINING & PARTICIPATION</span><h3>2025</h3></div>
+                                <span class="cert-count">7 achievements</span>
+                            </div>
+                            <ul class="cert-items">
+                                <li>Academic Awardee – 1st Year College</li>
+                                <li>Actively Participating in Volunteering for Water: Shaping a National Volunteering Framework in the Water Sector – Visayas Cluster</li>
+                                <li>School-Based/Onsite Face-to-Face Skills and Hands-on Practicum Training for Disaster Emergency Management – Hands-Only CPR and Rappelling Activities with Simulation</li>
+                                <li>NSTP Environmental Summit 2025</li>
+                                <li>TOXIC TRUTHS: Symposium on Drug Education, Prevention, and Control</li>
+                                <li>Symposium on Fire Safety, Prevention, and Control</li>
+                                <li>Run for a Cause</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="cert-year reveal">
+                        <div class="cert-year-marker"><span>2024</span></div>
+                        <div class="card cert-year-content">
+                            <div class="cert-year-heading">
+                                <div><span class="cert-period">TECHNICAL QUALIFICATION</span><h3>2024</h3></div>
+                                <span class="cert-count">3 achievements</span>
+                            </div>
+                            <ul class="cert-items">
+                                <li>Computer Systems Servicing (CSS) NC II – TESDA</li>
+                                <li>Active Member – Students' Training and Equipping for Emergency Response, Ivisan National High School</li>
+                                <li>With High Honors – Grade 12, TVL-ICT (Computer Systems Servicing NC II), School Year 2023–2024</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="cert-year reveal">
+                        <div class="cert-year-marker"><span>2023</span></div>
+                        <div class="card cert-year-content">
+                            <div class="cert-year-heading">
+                                <div><span class="cert-period">EARLY ACHIEVEMENTS</span><h3>2023</h3></div>
+                                <span class="cert-count">3 achievements</span>
+                            </div>
+                            <ul class="cert-items">
+                                <li>With Honors – Grade 11, TVL-ICT (Computer Systems Servicing NC II), School Year 2022–2023</li>
+                                <li>Advanced Microsoft Productivity Applications Training Workshop – Ivisan National High School</li>
+                                <li>Technical Assistant – National Learning Camp Assessment (NCLA)</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </section>
 
+
+
+
+
         <!-- =================================================
+
              PROJECTS
+
         ================================================== -->
+
+
 
         <section class="section" id="projects">
 
+
+
             <div class="wrap">
+
+
 
                 <div class="section-head reveal">
 
+
+
                     <div>
+
                         <p class="kicker">ACADEMIC WORK</p>
+
                         <h2>Featured Projects</h2>
+
                     </div>
 
+
+
                     <p class="section-intro">
+
                         Selected academic projects demonstrating my technical learning
+
                         and development experience.
+
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="grid project-grid">
 
+
+
                     <!-- PROJECT 01 -->
+
                     <article class="card project-card reveal">
+
+
 
                         <div class="project-visual">
 
+
+
                             <span>PROJECT 01</span>
 
+
+
                             <div class="visual-window">
+
                                 <i></i><i></i><i></i>
+
                                 <div class="visual-lines"></div>
+
                             </div>
 
+
+
                         </div>
+
+
 
                         <div class="project-body">
 
+
+
                             <div class="projecttop">
 
+
+
                                 <span class="projectnum">
+
                                     01 / SYSTEM DEVELOPMENT
+
                                 </span>
 
+
+
                                 <span class="tag">Django</span>
 
+
+
                             </div>
+
+
 
                             <h3>
+
                                 Equipment Borrowing Management System
+
                             </h3>
 
+
+
                             <p class="project-summary">
+
                                 A web-based system designed to manage equipment borrowing,
+
                                 user requests, approvals, and return monitoring.
+
                             </p>
 
+
+
                             <div class="tags">
+
                                 <span class="tag">Python</span>
+
                                 <span class="tag">Django</span>
+
                                 <span class="tag">MySQL</span>
+
                                 <span class="tag">HTML</span>
+
                                 <span class="tag">CSS</span>
+
                             </div>
 
+
+
                             <button
+
                                 class="text-button"
+
                                 data-project="equipment">
+
                                 View Case Study →
+
                             </button>
+
+
 
                         </div>
 
+
+
                     </article>
 
+
+
                     <!-- PROJECT 02 -->
+
                     <article class="card project-card reveal">
+
+
 
                         <div class="project-visual ar-visual">
 
+
+
                             <span>PROJECT 02</span>
 
+
+
                             <div class="tracking-frame">
+
                                 <div class="tracking-face"></div>
+
                                 <div class="tracking-hand">✋</div>
+
                                 <div class="tracking-crosshair">⌖</div>
+
                             </div>
 
+
+
                         </div>
+
+
 
                         <div class="project-body">
 
+
+
                             <div class="projecttop">
 
+
+
                                 <span class="projectnum">
+
                                     02 / COMPUTER VISION
+
                                 </span>
 
+
+
                                 <span class="tag">Python</span>
 
+
+
                             </div>
+
+
 
                             <h3>
+
                                 AR Hand & Face Tracker – Boss Fight
+
                             </h3>
 
+
+
                             <p class="project-summary">
+
                                 An interactive computer vision project that combines
+
                                 hand and face tracking with gesture-based gameplay.
+
                             </p>
 
+
+
                             <div class="tags">
+
                                 <span class="tag">Python</span>
+
                                 <span class="tag">OpenCV</span>
+
                                 <span class="tag">MediaPipe</span>
+
                                 <span class="tag">Computer Vision</span>
+
                             </div>
 
+
+
                             <button
+
                                 class="text-button"
+
                                 data-project="ar">
+
                                 View Case Study →
+
                             </button>
+
+
 
                         </div>
 
+
+
                     </article>
+
+
 
                 </div>
 
+
+
             </div>
+
+
 
         </section>
 
+
+
         <!-- =================================================
+
              DOCUMENTATION
+
         ================================================== -->
+
+
 
         <section class="section" id="documentation">
 
+
+
             <div class="wrap">
+
+
 
                 <div class="section-head reveal">
 
+
+
                     <div>
+
                         <p class="kicker">PROFESSIONAL DOCUMENTS</p>
+
                         <h2>Documentation</h2>
+
                     </div>
 
+
+
                     <p class="section-intro">
+
                         Supporting documents that present my qualifications,
+
                         professional communication, and project documentation.
+
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="docs-grid">
 
+
+
                     <!-- COVER LETTER -->
+
                     <article class="card doc-card reveal">
+
+
 
                         <div class="doc-icon">CV</div>
 
+
+
                         <div class="doc-content">
 
+
+
                             <span class="doc-type">
+
                                 PROFESSIONAL DOCUMENT
+
                             </span>
+
+
 
                             <h3>Cover Letter</h3>
 
+
+
                             <p>
+
                                 A professional application letter highlighting
+
                                 my educational background, technical skills,
+
                                 and interest in IT Support.
+
                             </p>
 
+
+
                             <a
+
                                 class="btn doc-download"
+
                                 href="assets/documents/Unarce_Jan_Michael_M_Cover_Letter.pdf"
+
                                 target="_blank"
+
                                 rel="noopener">
+
                                 View Cover Letter ↗
+
                             </a>
+
+
 
                         </div>
 
+
+
                     </article>
 
+
+
                     <!-- APPLICATION LETTER -->
+
                     <article class="card doc-card reveal">
+
+
 
                         <div class="doc-icon">AL</div>
 
+
+
                         <div class="doc-content">
 
+
+
                             <span class="doc-type">
+
                                 CAREER DOCUMENT
+
                             </span>
+
+
 
                             <h3>Application Letter</h3>
 
+
+
                             <p>
+
                                 A formal application letter for an entry-level IT Support position,
+
                                 highlighting my education, CSS NC II qualification, work immersion,
+
                                 and practical technical skills.
+
                             </p>
 
+
+
                             <a
+
                                 class="btn doc-download"
+
                                 href="assets/documents/Unarce_Jan_Michael_M_Application_Letter.pdf"
+
                                 target="_blank"
+
                                 rel="noopener">
+
                                 View Application Letter ↗
+
                             </a>
+
+
 
                         </div>
 
+
+
                     </article>
 
+
+
                     <!-- DEVELOPER GUIDE -->
+
                     <article class="card doc-card reveal">
+
+
 
                         <div class="doc-icon">DEV</div>
 
+
+
                         <div class="doc-content">
 
+
+
                             <span class="doc-type">
+
                                 TECHNICAL DOCUMENTATION
+
                             </span>
+
+
 
                             <h3>Developer Guide</h3>
 
+
+
                             <p>
+
                                 A technical guide describing the Equipment Borrowing
+
                                 Management System and the AR Hand & Face Tracker –
+
                                 Boss Fight project.
+
                             </p>
 
+
+
                             <a
+
                                 class="btn doc-download"
+
                                 href="assets/documents/Unace_Jan_Michael_M_Development_Guide_Two_Projects.pdf"
+
                                 target="_blank"
+
                                 rel="noopener">
+
                                 View Developer Guide ↗
+
                             </a>
+
+
 
                         </div>
 
+
+
                     </article>
 
+
+
                     <!-- RESUME -->
+
                     <article class="card doc-card reveal">
+
+
 
                         <div class="doc-icon">PDF</div>
 
+
+
                         <div class="doc-content">
 
+
+
                             <span class="doc-type">
+
                                 CAREER DOCUMENT
+
                             </span>
+
+
 
                             <h3>ATS Resume</h3>
 
+
+
                             <p>
+
                                 A resume presenting my educational background,
+
                                 technical competencies, work immersion, and
+
                                 relevant qualifications.
+
                             </p>
 
+
+
                             <a
+
                                 class="btn doc-download"
+
                                 href="assets/documents/Unarce_Jan_Michael_M_ATSResume.pdf"
+
                                 target="_blank"
+
                                 rel="noopener">
+
                                 View Resume ↗
+
                             </a>
 
+
+
                         </div>
+
+
 
                     </article>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </section>
 
+
+
         <!-- =================================================
+
              CONTACT
+
         ================================================== -->
+
+
 
         <section class="section" id="contact">
 
+
+
             <div class="wrap">
+
+
 
                 <div class="section-head reveal">
 
+
+
                     <div>
+
                         <p class="kicker">GET IN TOUCH</p>
+
                         <h2>Contact Me</h2>
+
                     </div>
 
+
+
                     <p class="section-intro">
+
                         Feel free to reach out for professional opportunities,
+
                         collaboration, or inquiries.
+
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="contactgrid">
 
+
+
                     <!-- CONTACT INFORMATION -->
+
                     <div class="card contact-card reveal">
+
+
 
                         <h3>Contact Information</h3>
 
+
+
                         <div class="contactitem">
+
+
 
                             <span class="contact-symbol">@</span>
 
+
+
                             <div>
+
                                 <b>Email</b>
 
+
+
                                 <p>
+
                                     <a
+
                                         href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to=unarcejanmichael18%40gmail.com"
+
                                         target="_blank"
+
                                         rel="noopener noreferrer">
+
                                         unarcejanmichael18@gmail.com
+
                                     </a>
+
                                 </p>
+
                             </div>
+
+
 
                         </div>
 
+
+
                         <div class="contactitem">
+
+
 
                             <span class="contact-symbol">in</span>
 
+
+
                             <div>
+
                                 <b>LinkedIn</b>
 
+
+
                                 <p>
+
                                     <a
+
                                         href="https://www.linkedin.com/in/jan-michael-unarce-0a999043a"
+
                                         target="_blank"
+
                                         rel="noopener">
+
                                         View LinkedIn Profile
+
                                     </a>
+
                                 </p>
+
                             </div>
+
+
 
                         </div>
 
+
+
                         <div class="contactitem">
+
+
 
                             <span class="contact-symbol">GH</span>
 
+
+
                             <div>
+
                                 <b>GitHub</b>
 
+
+
                                 <p>
+
                                     <a
+
                                         href="https://github.com/unarce123"
+
                                         target="_blank"
+
                                         rel="noopener">
+
                                         github.com/unarce123
+
                                     </a>
+
                                 </p>
+
                             </div>
 
+
+
                         </div>
+
+
 
                         <div class="contactitem">
 
+
+
                             <span class="contact-symbol">LOC</span>
 
+
+
                             <div>
+
                                 <b>Location</b>
+
                                 <p>Ivisan, Capiz, Philippines</p>
+
                             </div>
+
+
 
                         </div>
 
+
+
                     </div>
 
+
+
                     <!-- CONTACT FORM -->
+
                     <form class="card contact-form" id="contactForm">
+
+
 
                         <h3>Send a Message</h3>
 
+
+
                         <label for="sender">
+
                             Your Name
+
                         </label>
 
+
+
                         <input
+
                             type="text"
+
                             id="sender"
+
                             name="sender"
+
                             placeholder="Enter your name"
+
                             required>
+
+
 
                         <label for="senderEmail">
+
                             Your Email
+
                         </label>
+
+
 
                         <input
+
                             type="email"
+
                             id="senderEmail"
+
                             name="senderEmail"
+
                             placeholder="Enter your email address"
+
                             required>
 
+
+
                         <label for="message">
+
                             Message
+
                         </label>
 
+
+
                         <textarea
+
                             id="message"
+
                             name="message"
+
                             rows="5"
+
                             placeholder="Write your message here..."
+
                             required></textarea>
 
+
+
                         <button type="submit" class="btn primary">
+
                             Send Message →
+
                         </button>
 
+
+
                         <p class="form-note">
+
                             Your message will be sent directly to my email address.
+
                         </p>
+
+
 
                     </form>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </section>
+
+
 
     </main>
 
+
+
     <!-- =================================================
+
          CUSTOM TOAST NOTIFICATION
+
     ================================================== -->
 
+
+
     <div
+
         class="toast"
+
         id="toast"
+
         role="status"
+
         aria-live="polite"
+
         aria-atomic="true">
 
+
+
         <div class="toast-icon" id="toastIcon" aria-hidden="true">
+
             <svg viewBox="0 0 24 24">
+
                 <path d="m5 12 4 4L19 6"></path>
+
             </svg>
+
         </div>
+
+
 
         <div class="toast-content">
 
+
+
             <h4 id="toastTitle">
+
                 Message sent successfully!
+
             </h4>
 
+
+
             <p id="toastMessage">
+
                 Thank you for reaching out. I'll get back to you soon.
+
             </p>
+
+
 
         </div>
 
+
+
         <button
+
             type="button"
+
             class="toast-close"
+
             id="toastClose"
+
             aria-label="Close notification">
-            &times;
+
+            ×
+
         </button>
+
+
 
         <div class="toast-progress"></div>
 
+
+
     </div>
 
+
+
     <!-- =================================================
+
          PROJECT MODAL
+
     ================================================== -->
+
+
 
     <div class="modal" id="projectModal" aria-hidden="true">
 
+
+
         <div class="modal-panel">
 
+
+
             <button
+
                 class="modal-close"
+
                 id="modalClose"
+
                 aria-label="Close modal">
+
                 ×
+
             </button>
+
+
 
             <div id="modalContent"></div>
 
+
+
         </div>
+
+
 
     </div>
 
+
+
     <!-- =================================================
+
          PROJECT SCREENSHOT LIGHTBOX
+
     ================================================== -->
 
+
+
     <div
+
         class="image-lightbox"
+
         id="imageLightbox"
+
         aria-hidden="true"
+
         role="dialog"
+
         aria-modal="true"
+
         aria-label="Project screenshot preview">
 
+
+
         <button
+
             type="button"
+
             class="lightbox-close"
+
             id="lightboxClose"
+
             aria-label="Close screenshot">
+
             ×
+
         </button>
+
+
 
         <div class="lightbox-content">
 
+
+
             <img
+
                 id="lightboxImage"
+
                 src=""
+
                 alt="">
+
+
 
             <p id="lightboxCaption"></p>
 
+
+
         </div>
+
+
 
     </div>
 
+
+
     <!-- =================================================
+
          FOOTER
+
     ================================================== -->
+
+
 
     <footer class="foot">
 
+
+
         <div class="wrap footin">
 
+
+
             <p>
+
                 © <span id="year"></span>
+
                 Jan Michael M. Unarce. All rights reserved.
+
             </p>
+
+
 
             <a href="#home">Back to Top ↑</a>
 
+
+
         </div>
+
+
 
     </footer>
 
+
+
 </body>
+
+
 
 </html>

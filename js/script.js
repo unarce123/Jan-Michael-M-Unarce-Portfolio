@@ -1,5 +1,80 @@
 
 /* =========================================================
+   DARK MODE / LIGHT MODE
+========================================================= */
+
+(() => {
+    const root = document.documentElement;
+    const themeToggle = document.getElementById("themeToggle");
+    const themeColorMeta = document.getElementById("themeColorMeta");
+    const storageKey = "janMichaelPortfolioTheme";
+
+    function getSavedTheme() {
+        try {
+            const savedTheme = localStorage.getItem(storageKey);
+            return savedTheme === "light" || savedTheme === "dark"
+                ? savedTheme
+                : "dark";
+        } catch (error) {
+            return "dark";
+        }
+    }
+
+    function applyTheme(theme, savePreference = false) {
+        const selectedTheme = theme === "light" ? "light" : "dark";
+
+        root.setAttribute("data-theme", selectedTheme);
+
+        if (themeToggle) {
+            const isDark = selectedTheme === "dark";
+            const icon = themeToggle.querySelector(".theme-toggle-icon");
+            const label = themeToggle.querySelector(".theme-toggle-label");
+            const nextMode = isDark ? "light" : "dark";
+            const buttonText = isDark ? "Light mode" : "Dark mode";
+
+            if (icon) {
+                icon.textContent = isDark ? "☀" : "☾";
+            }
+
+            if (label) {
+                label.textContent = buttonText;
+            }
+
+            themeToggle.setAttribute("aria-label", `Switch to ${nextMode} mode`);
+            themeToggle.setAttribute("title", `Switch to ${nextMode} mode`);
+            themeToggle.setAttribute("aria-pressed", String(!isDark));
+        }
+
+        if (themeColorMeta) {
+            themeColorMeta.setAttribute(
+                "content",
+                selectedTheme === "light" ? "#f4f7fb" : "#0b1220"
+            );
+        }
+
+        if (savePreference) {
+            try {
+                localStorage.setItem(storageKey, selectedTheme);
+            } catch (error) {
+                console.warn("Theme preference could not be saved.", error);
+            }
+        }
+    }
+
+    // Keep the current portfolio appearance as the default on first visit.
+    applyTheme(getSavedTheme());
+
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+            const currentTheme = root.getAttribute("data-theme");
+            applyTheme(currentTheme === "dark" ? "light" : "dark", true);
+        });
+    }
+})();
+
+
+
+/* =========================================================
    PORTFOLIO CONFIGURATION
 ========================================================= */
 
@@ -274,117 +349,28 @@ const projectContent = {
 
         <div class="case-block">
 
-            <h3>Technology Stack</h3>
+            <h3>Technologies Used</h3>
 
             <p>
-                Django was used as the web framework, Python for application
-                logic, and MySQL for database management. HTML and CSS
-                were used to build the user interface.
+                Python and Django were used for backend development,
+                MySQL for database management, and HTML and CSS for
+                the user interface.
             </p>
 
         </div>
 
         <div class="case-block">
 
-            <h3>My Contribution</h3>
-
-            <p class="contribution-note">
-                This was a group academic project. The system was developed
-                collaboratively by the team. The specific responsibilities
-                I personally handled should be identified separately from
-                the shared project features.
-            </p>
-
-        </div>
-
-        <div class="case-block">
-
-            <h3>Testing Scenarios</h3>
+            <h3>My Role and Contributions</h3>
 
             <p>
-                These functional scenarios can be used to validate the
-                system. Record the actual outcome after performing each test.
-            </p>
-
-            <div class="test-checklist">
-
-                <div class="test-item">
-                    <span class="test-number">01</span>
-                    <div>
-                        <b>User Role Access</b>
-                        <p>
-                            Verify that administrator, staff, and user
-                            accounts access their authorized features
-                            and dashboards.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="test-item">
-                    <span class="test-number">02</span>
-                    <div>
-                        <b>Borrowing Request Management</b>
-                        <p>
-                            Verify request submission and pending, approved,
-                            rejected, and returned statuses.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="test-item">
-                    <span class="test-number">03</span>
-                    <div>
-                        <b>Due Date and Penalty Calculation</b>
-                        <p>
-                            Verify the seven-day due date after approval
-                            and the ₱10-per-day overdue penalty.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="test-item">
-                    <span class="test-number">04</span>
-                    <div>
-                        <b>Notifications</b>
-                        <p>
-                            Verify that relevant notifications are generated
-                            and unread notification status is updated.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="case-block">
-
-            <h3>Learning Experience</h3>
-
-            <p>
-                This project provided experience in web application
-                development, database integration, user authentication,
-                role-based access, and organizing system functionality.
-            </p>
-
-        </div>
-
-        <div class="case-block">
-
-            <h3>Repository</h3>
-
-            <p>
-                <a
-                    href="https://github.com/unarce123/equipment-borrowing-system"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project Repository →
-                </a>
+                Participated in system planning, database design,
+                application development, interface implementation,
+                and testing.
             </p>
 
         </div>
     `,
-
 
     ar: `
         <p class="doc-type">PROJECT 02 / COMPUTER VISION</p>
@@ -392,37 +378,24 @@ const projectContent = {
         <h2>AR Hand & Face Tracker – Boss Fight</h2>
 
         <p>
-            An interactive computer vision project that combines
-            real-time hand and face tracking with gesture-based gameplay.
+            An interactive augmented reality application that combines
+            hand tracking and face tracking to create a gesture-controlled
+            boss battle experience.
         </p>
 
         <div class="project-gallery">
 
             <figure>
                 <img
-                    src="assets/projects/ar-boss-fight.png"
-                    alt="AR Hand and Face Tracker Boss Fight Gameplay"
+                    src="assets/projects/ar-hand-face-tracker.png"
+                    alt="AR Hand and Face Tracker Boss Fight"
                     loading="lazy"
                     tabindex="0"
                     role="button"
-                    aria-label="Enlarge Boss Fight Gameplay">
+                    aria-label="Enlarge AR Hand and Face Tracker Screenshot">
 
                 <figcaption>
-                    Boss Fight Gameplay
-                </figcaption>
-            </figure>
-
-            <figure>
-                <img
-                    src="assets/projects/ar-start-screen.png"
-                    alt="AR Hand and Face Tracker Game Interface"
-                    loading="lazy"
-                    tabindex="0"
-                    role="button"
-                    aria-label="Enlarge Game Interface">
-
-                <figcaption>
-                    Game Interface
+                    AR Hand & Face Tracker – Boss Fight
                 </figcaption>
             </figure>
 
@@ -433,6 +406,7 @@ const projectContent = {
             <span class="tag">OpenCV</span>
             <span class="tag">MediaPipe</span>
             <span class="tag">Computer Vision</span>
+            <span class="tag">AR</span>
         </div>
 
         <div class="case-block">
@@ -440,158 +414,68 @@ const projectContent = {
             <h3>Project Overview</h3>
 
             <p>
-                The application uses a camera to detect and track hand
-                and face landmarks. These tracking capabilities are
-                integrated into an interactive boss fight game.
+                This project uses a webcam to track the user's face and
+                hand movements in real time. It transforms detected
+                gestures into game interactions, allowing the user to
+                control attacks and interact with a virtual boss.
             </p>
 
         </div>
 
         <div class="case-block">
 
-            <h3>Project Purpose</h3>
-
-            <p>
-                The project explores how computer vision can be used
-                to recognize human movements and translate them into
-                interactive application controls.
-            </p>
-
-        </div>
-
-        <div class="case-block">
-
-            <h3>Key Features</h3>
+            <h3>Core Technologies</h3>
 
             <ul>
-                <li>Real-time hand tracking.</li>
-                <li>Face detection and tracking.</li>
-                <li>Gesture-based game interaction.</li>
-                <li>Boss health and shield display.</li>
-                <li>Player score tracking.</li>
-                <li>Interactive game effects and visual feedback.</li>
+                <li>OpenCV for webcam input and image processing.</li>
+                <li>MediaPipe for real-time hand landmark detection.</li>
+                <li>Face tracking for player interaction.</li>
+                <li>Gesture recognition for attack activation.</li>
+                <li>Augmented reality elements for the game interface.</li>
             </ul>
 
         </div>
 
         <div class="case-block">
 
-            <h3>Technology Stack</h3>
+            <h3>Gameplay Features</h3>
+
+            <ul>
+                <li>Real-time face and hand tracking.</li>
+                <li>Gesture-controlled player attacks.</li>
+                <li>Boss health and shield indicators.</li>
+                <li>Score tracking and game-over state.</li>
+                <li>Visual effects and animated attacks.</li>
+                <li>Sound effects and background music.</li>
+            </ul>
+
+        </div>
+
+        <div class="case-block">
+
+            <h3>Problem Addressed</h3>
 
             <p>
-                Python is used for the main application logic.
-                OpenCV handles camera input and image processing,
-                while MediaPipe Tasks provides hand landmark detection.
+                Traditional computer interactions rely heavily on
+                keyboards and mouse input. This project explores
+                natural user interaction through camera-based
+                hand and face tracking.
             </p>
 
         </div>
 
         <div class="case-block">
 
-            <h3>My Contribution</h3>
+            <h3>My Role and Contributions</h3>
 
             <p>
-                Worked on combining hand and face tracking functionality
-                into the AR Hand & Face Tracker – Boss Fight application.
-                The project brings together camera input, landmark
-                detection, and interactive gameplay.
-            </p>
-
-            <p>
-                Also worked on integrating gesture-based player actions
-                and the game's boss health, shield, and score features.
+                Worked on the project concept, computer vision
+                implementation, gesture-based interaction, game
+                mechanics, and interface development.
             </p>
 
         </div>
 
-        <div class="case-block">
-
-            <h3>Testing Scenarios</h3>
-
-            <p>
-                These functional scenarios can be used to evaluate
-                the tracking and gameplay features. Record the actual
-                outcome after performing each test.
-            </p>
-
-            <div class="test-checklist">
-
-                <div class="test-item">
-                    <span class="test-number">01</span>
-                    <div>
-                        <b>Camera Initialization</b>
-                        <p>
-                            Verify that the application can access
-                            the camera and display its video feed.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="test-item">
-                    <span class="test-number">02</span>
-                    <div>
-                        <b>Hand and Face Tracking</b>
-                        <p>
-                            Verify that hand landmarks and face tracking
-                            respond to movements in front of the camera.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="test-item">
-                    <span class="test-number">03</span>
-                    <div>
-                        <b>Gesture Interaction</b>
-                        <p>
-                            Verify that supported hand gestures trigger
-                            their corresponding game actions.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="test-item">
-                    <span class="test-number">04</span>
-                    <div>
-                        <b>Game Status and Score</b>
-                        <p>
-                            Verify updates to boss health, shield,
-                            player score, and game-over behavior
-                            during gameplay.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="case-block">
-
-            <h3>Learning Experience</h3>
-
-            <p>
-                This project provided experience in computer vision,
-                camera input handling, hand and face tracking,
-                gesture interaction, and combining different
-                programming libraries into one application.
-            </p>
-
-        </div>
-
-        <div class="case-block">
-
-            <h3>Repository</h3>
-
-            <p>
-                <a
-                    href="https://github.com/unarce123/AR-Hand-Face-Tracker-Boss-Fight"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    View Project Repository →
-                </a>
-            </p>
-
-        </div>
     `
 
 };
@@ -604,61 +488,82 @@ const projectContent = {
 const projectModal = document.getElementById("projectModal");
 const modalContent = document.getElementById("modalContent");
 const modalClose = document.getElementById("modalClose");
+const projectButtons = document.querySelectorAll("[data-project]");
 
-let lastProjectTrigger = null;
+let lastActiveProjectButton = null;
 
 
-document.querySelectorAll("[data-project]").forEach(button => {
+function openProjectModal(projectName, triggerButton) {
+
+    if (!projectModal || !modalContent) {
+        return;
+    }
+
+    const content = projectContent[projectName];
+
+    if (!content) {
+        return;
+    }
+
+    lastActiveProjectButton = triggerButton || document.activeElement;
+
+    modalContent.innerHTML = content;
+
+    projectModal.classList.add("open");
+    projectModal.setAttribute("aria-hidden", "false");
+
+    document.body.classList.add("modal-open");
+
+    if (modalClose) {
+        modalClose.focus();
+    }
+
+}
+
+
+function closeProjectModal(restoreFocus = true) {
+
+    if (!projectModal) {
+        return;
+    }
+
+    projectModal.classList.remove("open");
+    projectModal.setAttribute("aria-hidden", "true");
+
+    document.body.classList.remove("modal-open");
+
+    if (modalContent) {
+        modalContent.innerHTML = "";
+    }
+
+    if (restoreFocus && lastActiveProjectButton) {
+        lastActiveProjectButton.focus();
+    }
+
+    lastActiveProjectButton = null;
+
+}
+
+
+projectButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        const project = button.dataset.project;
+        const projectName = button.dataset.project;
 
-        if (!projectContent[project] || !projectModal || !modalContent) {
-            return;
-        }
-
-        lastProjectTrigger = button;
-
-        modalContent.innerHTML = projectContent[project];
-
-        projectModal.classList.add("open");
-        projectModal.setAttribute("aria-hidden", "false");
-
-        document.body.style.overflow = "hidden";
-
-        if (modalClose) {
-            modalClose.focus();
-        }
+        openProjectModal(projectName, button);
 
     });
 
 });
 
 
-function closeProjectModal() {
-
-    if (!projectModal) {
-        return;
-    }
-
-    closeImageLightbox(false);
-
-    projectModal.classList.remove("open");
-    projectModal.setAttribute("aria-hidden", "true");
-
-    document.body.style.overflow = "";
-
-    if (lastProjectTrigger) {
-        lastProjectTrigger.focus();
-        lastProjectTrigger = null;
-    }
-
-}
-
-
 if (modalClose) {
-    modalClose.addEventListener("click", closeProjectModal);
+
+    modalClose.addEventListener("click", () => {
+        closeProjectModal();
+    });
+
 }
 
 
