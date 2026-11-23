@@ -1,4 +1,3 @@
-
 /* =========================================================
    DARK MODE / LIGHT MODE
 ========================================================= */
@@ -263,6 +262,12 @@ const projectContent = {
             <span class="tag">CSS</span>
         </div>
 
+        <div class="case-repository">
+            <a class="btn" href="https://github.com/unarce123/equipment-borrowing-system" target="_blank" rel="noopener noreferrer">
+                View GitHub Repository ↗
+            </a>
+        </div>
+
         <div class="case-block">
 
             <h3>Project Overview</h3>
@@ -387,15 +392,29 @@ const projectContent = {
 
             <figure>
                 <img
-                    src="assets/projects/ar-hand-face-tracker.png"
-                    alt="AR Hand and Face Tracker Boss Fight"
+                    src="assets/projects/ar-boss-fight.png"
+                    alt="AR Hand and Face Tracker Boss Fight gameplay screen"
                     loading="lazy"
                     tabindex="0"
                     role="button"
-                    aria-label="Enlarge AR Hand and Face Tracker Screenshot">
+                    aria-label="Enlarge AR Boss Fight Gameplay Screenshot">
 
                 <figcaption>
-                    AR Hand & Face Tracker – Boss Fight
+                    Boss Fight Gameplay
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img
+                    src="assets/projects/ar-start-screen.png"
+                    alt="AR Hand and Face Tracker start screen"
+                    loading="lazy"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Enlarge AR Start Screen Screenshot">
+
+                <figcaption>
+                    Game Start Screen
                 </figcaption>
             </figure>
 
@@ -407,6 +426,12 @@ const projectContent = {
             <span class="tag">MediaPipe</span>
             <span class="tag">Computer Vision</span>
             <span class="tag">AR</span>
+        </div>
+
+        <div class="case-repository">
+            <a class="btn" href="https://github.com/unarce123/AR-Hand-Face-Tracker-Boss-Fight" target="_blank" rel="noopener noreferrer">
+                View GitHub Repository ↗
+            </a>
         </div>
 
         <div class="case-block">

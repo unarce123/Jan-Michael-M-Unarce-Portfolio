@@ -4655,3 +4655,36 @@ body::after {
         box-shadow: 0 12px 25px rgba(28, 49, 78, .08);
     }
 }
+
+
+/* =========================================================
+   DOCUMENT DOWNLOAD + CASE STUDY REPOSITORY ACTIONS
+   ========================================================= */
+
+.doc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.doc-actions .doc-download {
+    margin-top: 0;
+}
+
+.case-repository {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 14px 0 22px;
+}
+
+@media (max-width: 480px) {
+    .doc-actions {
+        gap: 8px;
+    }
+
+    .doc-actions .btn {
+        max-width: 100%;
+    }
+}
