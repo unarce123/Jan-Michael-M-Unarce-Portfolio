@@ -224,7 +224,7 @@ const projectContent = {
 
         <div class="project-gallery">
 
-            <figure>
+              <figure>
                 <img
                     src="assets/projects/equipment-dashboard.png"
                     alt="Equipment Borrowing Management System Dashboard"
@@ -251,6 +251,7 @@ const projectContent = {
                     Equipment List
                 </figcaption>
             </figure>
+
 
         </div>
 
